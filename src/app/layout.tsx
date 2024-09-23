@@ -4,6 +4,7 @@ import React from 'react'
 
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
+import { Toaster } from '@/components/ui/toaster'
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -18,7 +19,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
 	title: {
 		template: '%s | bugbook',
-		default: 'bugbook',
+		default: 'BugBook',
 	},
 	description: 'The Social Media App for Powernerds',
 }
@@ -38,7 +39,8 @@ export default function RootLayout({
 					disableTransitionOnChange
 				>
 					{children}
-				</ThemeProvider>{' '}
+				</ThemeProvider>
+				<Toaster />
 			</body>
 		</html>
 	)

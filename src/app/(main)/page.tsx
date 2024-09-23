@@ -1,9 +1,11 @@
-import { Button } from '@/components/ui/button'
+import PostEditor from '@/components/posts/editor/PostEditor'
 
-export default function Home() {
+export default function HomePage() {
 	return (
-		<div>
-			<Button className='text-black'>Click Me!</Button>
-		</div>
+		<main className='flex w-full min-w-0 gap-5'>
+			<div className='w-full min-w-0 space-y-5'>
+				<PostEditor />
+			</div>
+		</main>
 	)
 }
