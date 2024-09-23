@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import SearchField from '@/components/SearchField'
 import UserButton from '@/components/UserButton'
 
 export default function Navbar() {
@@ -9,6 +10,7 @@ export default function Navbar() {
 				<Link href='/' className='text-2xl font-bold text-primary'>
 					BugBook
 				</Link>
+				<SearchField />
 				<UserButton className='sm:ms-auto' />
 			</div>
 		</header>
