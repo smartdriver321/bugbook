@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import UserButton from '@/components/UserButton'
+
 export default function Navbar() {
 	return (
 		<header className='sticky top-0 z-10 bg-card shadow-sm'>
@@ -7,6 +9,7 @@ export default function Navbar() {
 				<Link href='/' className='text-2xl font-bold text-primary'>
 					BugBook
 				</Link>
+				<UserButton className='sm:ms-auto' />
 			</div>
 		</header>
 	)
