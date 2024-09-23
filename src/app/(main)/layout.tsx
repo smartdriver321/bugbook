@@ -3,6 +3,7 @@ import React from 'react'
 import { validateRequest } from '@/auth'
 
 import SessionProvider from '@/provider/SessionProvider'
+import Navbar from './Navbar'
 
 export default async function MainLayout({
 	children,
@@ -16,7 +17,7 @@ export default async function MainLayout({
 	return (
 		<SessionProvider value={session}>
 			<div className='flex min-h-screen flex-col'>
-				Navbar MenuBar
+				<Navbar />
 				{children}
 			</div>
 		</SessionProvider>
