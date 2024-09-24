@@ -1,8 +1,10 @@
+import { NextRequest } from 'next/server'
+
 import { validateRequest } from '@/auth'
 import prisma from '@/lib/prisma'
 import { postDataInclude, PostsPage } from '@/types/types'
 
-export async function GET() {
+export async function GET(req: NextRequest) {
 	try {
 		const { user } = await validateRequest()
 		const cursor = req.nextUrl.searchParams.get('cursor') || undefined

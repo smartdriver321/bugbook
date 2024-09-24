@@ -1,13 +1,12 @@
 'use client'
 
-import { Loader2 } from 'lucide-react'
-import { useInfiniteQuery } from '@tanstack/react-query'
-
-import { PostsPage } from '@/types/types'
-import kyInstance from '@/lib/ky'
-import PostsLoadingSkeleton from '@/components/posts/PostsLoadingSkeleton'
 import InfiniteScrollContainer from '@/components/InfiniteScrollContainer'
 import Post from '@/components/posts/Post'
+import PostsLoadingSkeleton from '@/components/posts/PostsLoadingSkeleton'
+import kyInstance from '@/lib/ky'
+import { PostsPage } from '@/types/types'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { Loader2 } from 'lucide-react'
 
 export default function ForYouFeed() {
 	const {
