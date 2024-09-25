@@ -7,13 +7,13 @@ import { validateRequest } from '@/auth'
 import prisma from '@/lib/prisma'
 import { formatNumber } from '@/lib/utils'
 import { FollowerInfo, getUserDataSelect, UserData } from '@/types/types'
+import UserPosts from './UserPosts'
 import UserAvatar from '@/components/UserAvatar'
 import TrendsSidebar from '@/components/TrendsSidebar'
 import FollowerCount from '@/components/FollowerCount'
-import UserPosts from './UserPosts'
+import EditProfileButton from './EditProfileButton'
 import FollowButton from '@/components/FollowButton'
 import Linkify from '@/components/Linkify'
-import { Button } from '@/components/ui/button'
 
 const getUser = cache(async (username: string, loggedInUserId: string) => {
 	const user = await prisma.user.findFirst({
@@ -116,7 +116,7 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
 					</div>
 				</div>
 				{user.id === loggedInUserId ? (
-					<Button>Edit profile</Button>
+					<EditProfileButton user={user} />
 				) : (
 					<FollowButton userId={user.id} initialState={followerInfo} />
 				)}
