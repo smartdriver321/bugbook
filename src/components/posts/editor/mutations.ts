@@ -7,17 +7,29 @@ import {
 
 import { submitPost } from './actions'
 import { PostsPage } from '@/types/types'
+import { useSession } from '@/provider/SessionProvider'
 import { useToast } from '@/components/ui/use-toast'
 
 export function useSubmitPostMutation() {
 	const { toast } = useToast()
+
+	const { user } = useSession()
 
 	const queryClient = useQueryClient()
 
 	const mutation = useMutation({
 		mutationFn: submitPost,
 		onSuccess: async (newPost) => {
-			const queryFilter: QueryFilters = { queryKey: ['post-feed', 'for-you'] }
+			const queryFilter = {
+				queryKey: ['post-feed'],
+				predicate(query) {
+					return (
+						query.queryKey.includes('for-you') ||
+						(query.queryKey.includes('user-posts') &&
+							query.queryKey.includes(user.id))
+					)
+				},
+			} satisfies QueryFilters
 
 			await queryClient.cancelQueries(queryFilter)
 
@@ -44,7 +56,7 @@ export function useSubmitPostMutation() {
 			queryClient.invalidateQueries({
 				queryKey: queryFilter.queryKey,
 				predicate(query) {
-					return !query.state.data
+					return queryFilter.predicate(query) && !query.state.data
 				},
 			})
 

@@ -1,3 +1,4 @@
+import { usePathname, useRouter } from 'next/navigation'
 import { PostsPage } from '@/types/types'
 import {
 	InfiniteData,
@@ -5,17 +6,17 @@ import {
 	useMutation,
 	useQueryClient,
 } from '@tanstack/react-query'
-import { usePathname, useRouter } from 'next/navigation'
-import { useToast } from '../ui/use-toast'
+
 import { deletePost } from './actions'
+import { useToast } from '../ui/use-toast'
 
 export function useDeletePostMutation() {
-	const router = useRouter()
-	const pathname = usePathname()
-
 	const { toast } = useToast()
 
 	const queryClient = useQueryClient()
+
+	const router = useRouter()
+	const pathname = usePathname()
 
 	const mutation = useMutation({
 		mutationFn: deletePost,
