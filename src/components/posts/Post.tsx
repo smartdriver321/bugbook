@@ -12,6 +12,7 @@ import Linkify from '../Linkify'
 import Image from 'next/image'
 import { Media } from '@prisma/client'
 import LikeButton from './LikeButton'
+import BookmarkButton from './BookmarkButton'
 
 interface PostProps {
 	post: PostData
@@ -71,6 +72,14 @@ export default function Post({ post }: PostProps) {
 						}}
 					/>
 				</div>
+				<BookmarkButton
+					postId={post.id}
+					initialState={{
+						isBookmarkedByUser: post.bookmarks.some(
+							(bookmark) => bookmark.userId === user.id
+						),
+					}}
+				/>
 			</div>
 		</article>
 	)
