@@ -54,6 +54,7 @@ export async function deleteComment(id: string) {
 	})
 
 	if (!comment) throw new Error('Comment not found')
+
 	if (comment.userId !== user.id) throw new Error('Unauthorized')
 
 	const deletedComment = await prisma.comment.delete({
