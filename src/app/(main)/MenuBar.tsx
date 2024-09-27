@@ -12,7 +12,7 @@ interface MenuBarProps {
 	className?: string
 }
 
-export default async function Menubar({ className }: MenuBarProps) {
+export default async function MenuBar({ className }: MenuBarProps) {
 	const { user } = await validateRequest()
 
 	if (!user) return null
