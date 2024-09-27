@@ -7,6 +7,7 @@ import {
 	updateUserProfileSchema,
 	UpdateUserProfileValues,
 } from '@/lib/validation'
+import streamServerClient from '@/lib/stream'
 
 export async function updateUserProfile(values: UpdateUserProfileValues) {
 	const validatedValues = updateUserProfileSchema.parse(values)
@@ -20,6 +21,12 @@ export async function updateUserProfile(values: UpdateUserProfileValues) {
 			where: { id: user.id },
 			data: validatedValues,
 			select: getUserDataSelect(user.id),
+		})
+		await streamServerClient.partialUpdateUser({
+			id: user.id,
+			set: {
+				name: validatedValues.displayName,
+			},
 		})
 
 		return updatedUser

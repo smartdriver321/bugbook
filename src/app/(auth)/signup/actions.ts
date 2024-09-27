@@ -2,13 +2,14 @@
 
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { lucia } from '@/auth'
 import { generateIdFromEntropySize } from 'lucia'
 import { hash } from '@node-rs/argon2'
 import { isRedirectError } from 'next/dist/client/components/redirect'
 
+import { lucia } from '@/auth'
 import prisma from '@/lib/prisma'
 import { signUpSchema, SignUpValues } from '@/lib/validation'
+import streamServerClient from '@/lib/stream'
 
 export async function signUp(
 	credentials: SignUpValues
@@ -64,6 +65,11 @@ export async function signUp(
 					email,
 					passwordHash,
 				},
+			})
+			await streamServerClient.upsertUser({
+				id: userId,
+				username,
+				name: username,
 			})
 		})
 

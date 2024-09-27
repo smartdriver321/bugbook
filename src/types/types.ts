@@ -127,3 +127,7 @@ export const notificationsInclude = {
 export type NotificationData = Prisma.NotificationGetPayload<{
 	include: typeof notificationsInclude
 }>
+
+export interface MessageCountInfo {
+	unreadCount: number
+}
